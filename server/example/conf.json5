@@ -34,24 +34,9 @@
 	},
 	TACHI_CONFIG: {
 		TYPE: "omni",
-		NAME: "Tachi Local Dev",
+		NAME: "SekaiTachi",
 		GAMES: [
-			"iidx",
-			"museca",
-			"sdvx",
-			"bms",
-			"chunithm",
-			"usc",
-			"wacca",
-			"popn",
-			"jubeat",
-			"pms",
-			"gitadora",
-			"maimai",
-			"maimaidx",
-			"itg",
-			"ongeki",
-			"ddr"
+			"proseka",
 		],
 		IMPORT_TYPES: [
 			"file/eamusement-iidx-csv",
