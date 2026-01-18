@@ -83,6 +83,7 @@ const scoreMovers: ScoreMovers = {
 	"pms:Keyboard": BMS_MV,
 	"chunithm:Single": NEUTRAL_MV,
 	"ongeki:Single": NEUTRAL_MV,
+	"proseka:Single": NEUTRAL_MV,
 	"usc:Controller": NEUTRAL_MV,
 	"usc:Keyboard": NEUTRAL_MV,
 	"sdvx:Single": NEUTRAL_MV,

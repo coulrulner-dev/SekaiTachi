@@ -35,6 +35,7 @@ const GPT_UTILS: Record<GPTString, Array<GPTUtility>> = {
 	"ongeki:Single": [ONGEKIRefreshBreakdownInsight, ONGEKIClassicBreakdownInsight],
 	"ddr:SP": [],
 	"ddr:DP": [],
+	"proseka:Single": [],
 };
 
 export function GetGPTUtils(game: Game, playtype: Playtype) {
