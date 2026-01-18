@@ -3,7 +3,7 @@ import { CreatePBMergeFor } from "game-implementations/utils/pb-merge";
 import { ProfileAvgBestN } from "game-implementations/utils/profile-calc";
 import { SessionAvgBest10For } from "game-implementations/utils/session-calc";
 import { IsNullish } from "utils/misc";
-import { PROSEKARating } from "rg-stats";
+import { PROSEKARating } from "sekai-rg-stats";
 import type { GPTServerImplementation } from "game-implementations/types";
 import { FmtNum, FmtPercent } from "tachi-common/utils/util";
 

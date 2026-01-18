@@ -129,7 +129,7 @@ export const PROSEKA_SINGLE_CONF = {
             type: "DERIVED",
             values: PROSEKAColours,
             minimumScores: 30,
-            minimumRelevantValue: "BLACK",
+            minimumRelevantValue: "RAINBOW",
         },
     },
 
