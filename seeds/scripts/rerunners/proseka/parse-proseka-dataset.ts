@@ -99,21 +99,79 @@ const DIFFICULTIES_URL =
 		process.exit(1);
 	}
 
-	// Parse songs
-	console.log("\nParsing songs...");
-	const songs: TachiSong[] = musicsData.map((music) => ({
-		altTitles: [],
-		artist: music.composer || music.arranger || "Unknown",
-		data: {
-			genre:
-				music.categories && music.categories.length > 0 ? music.categories[0] : undefined,
-		},
-		id: music.id,
-		searchTerms: [],
-		title: music.title,
-	}));
+	const songsOutputPath = path.join(outputDir, "songs-proseka.json");
+	const chartsOutputPath = path.join(outputDir, "charts-proseka.json");
 
-	console.log(`✓ Parsed ${songs.length} songs`);
+	// Load existing data if it exists
+	let existingSongs: TachiSong[] = [];
+	let existingCharts: TachiChart[] = [];
+
+	if (fs.existsSync(songsOutputPath)) {
+		try {
+			existingSongs = JSON.parse(fs.readFileSync(songsOutputPath, "utf8"));
+			console.log(`\n✓ Loaded ${existingSongs.length} existing songs`);
+		} catch (err) {
+			console.warn(`Warning: Could not read existing songs file:`, (err as Error).message);
+		}
+	}
+
+	if (fs.existsSync(chartsOutputPath)) {
+		try {
+			existingCharts = JSON.parse(fs.readFileSync(chartsOutputPath, "utf8"));
+			console.log(`✓ Loaded ${existingCharts.length} existing charts`);
+		} catch (err) {
+			console.warn(`Warning: Could not read existing charts file:`, (err as Error).message);
+		}
+	}
+
+	// Parse songs - merge with existing
+	console.log("\nParsing songs...");
+	const existingSongMap = new Map(existingSongs.map((s) => [s.id, s]));
+	let newSongsCount = 0;
+	let updatedSongsCount = 0;
+
+	const songs: TachiSong[] = musicsData.map((music) => {
+		const existing = existingSongMap.get(music.id);
+
+		if (existing) {
+			// Song exists - preserve any manual edits to data field, but update core fields
+			updatedSongsCount++;
+			return {
+				...existing,
+				title: music.title,
+				artist: music.composer || music.arranger || "Unknown",
+				// Preserve existing data fields, only add genre if not present
+				data: {
+					...existing.data,
+					genre:
+						existing.data.genre ||
+						(music.categories && music.categories.length > 0
+							? music.categories[0]
+							: undefined),
+				},
+			};
+		} else {
+			// New song
+			newSongsCount++;
+			return {
+				altTitles: [],
+				artist: music.composer || music.arranger || "Unknown",
+				data: {
+					genre:
+						music.categories && music.categories.length > 0
+							? music.categories[0]
+							: undefined,
+				},
+				id: music.id,
+				searchTerms: [],
+				title: music.title,
+			};
+		}
+	});
+
+	console.log(
+		`✓ Parsed ${songs.length} songs (${newSongsCount} new, ${updatedSongsCount} updated)`
+	);
 
 	// Parse charts with UPPERCASE difficulties matching your config
 	console.log("\nParsing charts...");
@@ -126,25 +184,41 @@ const DIFFICULTIES_URL =
 		append: "APPEND",
 	};
 
+	// Create a map of existing charts by inGameID
+	const existingChartMap = new Map(existingCharts.map((c) => [c.data.inGameID, c]));
+	let newChartsCount = 0;
+	let updatedChartsCount = 0;
+
 	const charts: TachiChart[] = difficultiesData.map((diff) => {
 		const diffName = difficultyMap[diff.musicDifficulty] || diff.musicDifficulty.toUpperCase();
+		const existing = existingChartMap.get(diff.id);
 
-		return {
-			chartID: CreateChartID(),
-			data: {
-				inGameID: diff.id, // Using the difficulty's ID as inGameID
-			},
-			difficulty: diffName,
-			level: String(diff.playLevel),
-			levelNum: diff.playLevel,
-			playtype: "Single",
-			songID: diff.musicId,
-			versions: ["proseka"], // Using the version key from your config
-			isPrimary: true,
-		};
+		if (existing) {
+			// Chart exists - preserve everything, don't update
+			updatedChartsCount++;
+			return existing;
+		} else {
+			// New chart
+			newChartsCount++;
+			return {
+				chartID: CreateChartID(),
+				data: {
+					inGameID: diff.id,
+				},
+				difficulty: diffName,
+				level: String(diff.playLevel),
+				levelNum: diff.playLevel,
+				playtype: "Single",
+				songID: diff.musicId,
+				versions: ["proseka"],
+				isPrimary: true,
+			};
+		}
 	});
 
-	console.log(`✓ Parsed ${charts.length} charts`);
+	console.log(
+		`✓ Parsed ${charts.length} charts (${newChartsCount} new, ${updatedChartsCount} updated)`
+	);
 
 	// Create output directory if it doesn't exist
 	if (!fs.existsSync(outputDir)) {
@@ -153,9 +227,6 @@ const DIFFICULTIES_URL =
 	}
 
 	// Write output files
-	const songsOutputPath = path.join(outputDir, "songs-proseka.json");
-	const chartsOutputPath = path.join(outputDir, "charts-proseka.json");
-
 	try {
 		fs.writeFileSync(songsOutputPath, JSON.stringify(songs, null, "\t"));
 		console.log(`\n✓ Wrote ${songs.length} songs to ${songsOutputPath}`);
@@ -174,8 +245,8 @@ const DIFFICULTIES_URL =
 
 	// Print summary
 	console.log("\n=== Summary ===");
-	console.log(`Songs: ${songs.length}`);
-	console.log(`Charts: ${charts.length}`);
+	console.log(`Songs: ${songs.length} (${newSongsCount} new, ${updatedSongsCount} updated)`);
+	console.log(`Charts: ${charts.length} (${newChartsCount} new, ${updatedChartsCount} updated)`);
 	console.log("\nDifficulty breakdown:");
 	const diffCounts: Record<string, number> = {};
 	charts.forEach((chart) => {
@@ -187,5 +258,5 @@ const DIFFICULTIES_URL =
 			console.log(`  ${diff}: ${count}`);
 		});
 
-	console.log("\n✓ Done!");
+	console.log("\n✓ Done! Manual edits to existing entries have been preserved.");
 })();

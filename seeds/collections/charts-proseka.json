@@ -7671,8 +7671,8 @@
 		},
 		"difficulty": "APPEND",
 		"isPrimary": true,
-		"level": "35",
-		"levelNum": 35,
+		"level": "36",
+		"levelNum": 36.0,
 		"playtype": "Single",
 		"songID": 128,
 		"versions": [
@@ -10522,7 +10522,7 @@
 		"difficulty": "MASTER",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.3,
 		"playtype": "Single",
 		"songID": 163,
 		"versions": [
@@ -10597,7 +10597,7 @@
 		"difficulty": "MASTER",
 		"isPrimary": true,
 		"level": "35",
-		"levelNum": 35,
+		"levelNum": 35.9,
 		"playtype": "Single",
 		"songID": 164,
 		"versions": [
@@ -22417,7 +22417,7 @@
 		"difficulty": "MASTER",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.4,
 		"playtype": "Single",
 		"songID": 315,
 		"versions": [
@@ -23482,7 +23482,7 @@
 		"difficulty": "MASTER",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.6,
 		"playtype": "Single",
 		"songID": 329,
 		"versions": [
@@ -26602,7 +26602,7 @@
 		"difficulty": "MASTER",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.5,
 		"playtype": "Single",
 		"songID": 370,
 		"versions": [
@@ -27862,7 +27862,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.6,
 		"playtype": "Single",
 		"songID": 388,
 		"versions": [
@@ -32211,8 +32211,8 @@
 		},
 		"difficulty": "APPEND",
 		"isPrimary": true,
-		"level": "35",
-		"levelNum": 35,
+		"level": "36",
+		"levelNum": 36.2,
 		"playtype": "Single",
 		"songID": 447,
 		"versions": [
@@ -32302,7 +32302,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.4,
 		"playtype": "Single",
 		"songID": 448,
 		"versions": [
@@ -32392,7 +32392,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.3,
 		"playtype": "Single",
 		"songID": 449,
 		"versions": [
@@ -33487,7 +33487,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.9,
 		"playtype": "Single",
 		"songID": 465,
 		"versions": [
@@ -35032,7 +35032,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.3,
 		"playtype": "Single",
 		"songID": 486,
 		"versions": [
@@ -35122,7 +35122,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.5,
 		"playtype": "Single",
 		"songID": 487,
 		"versions": [
@@ -35212,7 +35212,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.0,
 		"playtype": "Single",
 		"songID": 488,
 		"versions": [
@@ -39217,7 +39217,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.7,
 		"playtype": "Single",
 		"songID": 543,
 		"versions": [
@@ -44197,7 +44197,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.0,
 		"playtype": "Single",
 		"songID": 622,
 		"versions": [
@@ -45787,7 +45787,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "36",
-		"levelNum": 36,
+		"levelNum": 36.5,
 		"playtype": "Single",
 		"songID": 647,
 		"versions": [
@@ -47077,7 +47077,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.1,
 		"playtype": "Single",
 		"songID": 668,
 		"versions": [
@@ -47317,7 +47317,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "38",
-		"levelNum": 38,
+		"levelNum": 38.1,
 		"playtype": "Single",
 		"songID": 671,
 		"versions": [
@@ -47497,7 +47497,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.9,
 		"playtype": "Single",
 		"songID": 675,
 		"versions": [
@@ -47512,7 +47512,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.2,
 		"playtype": "Single",
 		"songID": 676,
 		"versions": [
@@ -48217,7 +48217,7 @@
 		"difficulty": "APPEND",
 		"isPrimary": true,
 		"level": "37",
-		"levelNum": 37,
+		"levelNum": 37.2,
 		"playtype": "Single",
 		"songID": 691,
 		"versions": [

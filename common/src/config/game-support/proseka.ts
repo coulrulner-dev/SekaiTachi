@@ -15,17 +15,17 @@ export const PROSEKA_CONF = {
 
 export const PROSEKAColours = [
     ClassValue("BLUE", "青", "Blue: 0 - 9.99 Rating"),
-    ClassValue("RED", "赤", "Red: 10 - 13.99 Rating"),
-    ClassValue("YELLOW", "黄", "Yellow: 14 - 17.99 Rating"),
-    ClassValue("ORANGE", "橙", "Orange: 18 - 21.99 Rating"),
-    ClassValue("COPPER", "銅", "Copper: 22 - 25.99 Rating"),
-    ClassValue("SILVER", "銀", "Silver: 26 - 29.99 Rating"),
-    ClassValue("GOLD", "金", "Gold: 30 - 31.99 Rating"),
-    ClassValue("PLATINUM", "鉑", "Platinum: 32 - 32.99 Rating"),
-    ClassValue("BLACK", "黒", "Black: 33 - 33.99 Rating"),
-    ClassValue("GRAY", "天使", "White: 34 - 34.99 Rating"),
-    ClassValue("WHITE", "宇宙", "Gray: 35 - 35.99 Rating"),
-    ClassValue("RAINBOW", "神", "Black: >=36 Rating"),
+    ClassValue("RED", "赤", "Red: 10 - 14.99 Rating"),
+    ClassValue("YELLOW", "黄", "Yellow: 15 - 19.99 Rating"),
+    ClassValue("ORANGE", "橙", "Orange: 20 - 24.99 Rating"),
+    ClassValue("COPPER", "銅", "Copper: 25 - 28.99 Rating"),
+    ClassValue("SILVER", "銀", "Silver: 29 - 31.99 Rating"),
+    ClassValue("GOLD", "金", "Gold: 32 - 33.99 Rating"),
+    ClassValue("PLATINUM", "鉑", "Platinum: 34 - 35.99 Rating"),
+    ClassValue("BLACK", "黒", "Black: 36 - 37.99 Rating"),
+    ClassValue("GRAY", "天使", "Angel: 38 - 38.99 Rating"),
+    ClassValue("WHITE", "宇宙", "Cosmic: 39 - 39.99 Rating"),
+    ClassValue("RAINBOW", "神", "God: >=40 Rating"),
 ];
 
 export const PROSEKA_SINGLE_CONF = {
@@ -129,7 +129,7 @@ export const PROSEKA_SINGLE_CONF = {
             type: "DERIVED",
             values: PROSEKAColours,
             minimumScores: 30,
-            minimumRelevantValue: "RAINBOW",
+            minimumRelevantValue: "SILVER",
         },
     },
 

@@ -17,7 +17,7 @@ export const PROSEKA_IMPL: GPTServerImplementation<"proseka:Single"> = {
         },
     },
     scoreCalcs: {
-        rating: (scoreData, chart) => PROSEKARating.calculate(scoreData.perfectjudgements, scoreData.greatjudgements, scoreData.goodjudgements, scoreData.badjudgements, scoreData.missjudgements, chart.levelNum, (scoreData.perfectjudgements + scoreData.greatjudgements + scoreData.goodjudgements + scoreData.badjudgements + scoreData.missjudgements)*3),
+        rating: (scoreData, chart) => PROSEKARating.calculate(scoreData.perfectjudgements, scoreData.greatjudgements, scoreData.goodjudgements, scoreData.badjudgements, scoreData.missjudgements, chart.levelNum, (scoreData.perfectjudgements + scoreData.greatjudgements + scoreData.goodjudgements + scoreData.badjudgements + scoreData.missjudgements)),
     },
     sessionCalcs: { naiveRating: SessionAvgBest10For("rating") },
     profileCalcs: { naiveRating: ProfileAvgBestN("rating", 30, false, 100) },
@@ -27,30 +27,31 @@ export const PROSEKA_IMPL: GPTServerImplementation<"proseka:Single"> = {
             if (IsNullish(rating)) {
                 return null;
             }
-            if (rating >= 36){
+            if (rating >= 40) {
                 return "RAINBOW";
-            } else if (rating >= 35){
+            } else if (rating >= 39) {
                 return "WHITE";
-            } else if (rating >= 34){
+            } else if (rating >= 38) {
                 return "GRAY";
-            } else if (rating >= 33){
+            } else if (rating >= 36) {
                 return "BLACK";
-            } else if (rating >= 32){
+            } else if (rating >= 34) {
                 return "PLATINUM";
-            } else if (rating >= 30){
+            } else if (rating >= 32) {
                 return "GOLD";
-            } else if (rating >= 26){
+            } else if (rating >= 29) {
                 return "SILVER";
-            } else if (rating >= 22){
+            } else if (rating >= 25) {
                 return "COPPER";
-            } else if (rating >= 18){
+            } else if (rating >= 20) {
                 return "ORANGE";
-            } else if (rating >= 14){
+            } else if (rating >= 15) {
                 return "YELLOW";
-            } else if (rating >= 10){
+            } else if (rating >= 10) {
                 return "RED";
-            } 
+            }
             return "BLUE";
+
         },
     },
     goalCriteriaFormatters: {
