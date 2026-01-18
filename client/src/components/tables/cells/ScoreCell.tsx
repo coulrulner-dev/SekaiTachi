@@ -14,7 +14,7 @@ export default function ScoreCell({
 	score?: integer;
 	percent: number;
 	percentDp?: integer;
-	grade: string;
+	grade?: string;
 	colour: string;
 	showScore?: boolean;
 	scoreRenderFn?: (s: number) => string;

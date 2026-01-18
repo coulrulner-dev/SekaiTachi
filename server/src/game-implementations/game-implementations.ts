@@ -14,6 +14,7 @@ import { POPN_9B_IMPL } from "./games/popn";
 import { SDVX_IMPL } from "./games/sdvx";
 import { USC_CONTROLLER_IMPL, USC_KEYBOARD_IMPL } from "./games/usc";
 import { WACCA_IMPL } from "./games/wacca";
+import { PROSEKA_IMPL } from "./games/proseka";
 import type { GPTImplementations } from "./types";
 
 /**
@@ -48,4 +49,5 @@ export const GPT_SERVER_IMPLEMENTATIONS: GPTImplementations = {
 	"ongeki:Single": ONGEKI_IMPL,
 	"ddr:SP": DDR_IMPL,
 	"ddr:DP": DDR_IMPL,
+	"proseka:Single": PROSEKA_IMPL,
 };

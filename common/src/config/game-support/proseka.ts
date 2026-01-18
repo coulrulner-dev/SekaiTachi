@@ -1,33 +1,31 @@
 import { FAST_SLOW_MAXCOMBO } from "./_common";
-import { FmtNum } from "../../utils/util";
+import { FmtNum, FmtPercent, FmtScoreNoCommas } from "../../utils/util";
 import { ClassValue, ToDecimalPlaces, zodNonNegativeInt } from "../config-utils";
 import { p } from "prudence";
 import { z } from "zod";
 import type { INTERNAL_GAME_CONFIG, INTERNAL_GAME_PT_CONFIG } from "../../types/internals";
 
 export const PROSEKA_CONF = {
-	name: "Project Sekai",
-	playtypes: ["Single"],
-	songData: z.strictObject({
-		genre: z.string(),
-		displayVersion: z.string(),
-		duration: z.number().optional(),
-	}),
+    name: "Project Sekai: Colorful Stage! feat. Hatsune Miku",
+    playtypes: ["Single"],
+    songData: z.strictObject({
+		genre: z.string().optional(),
+    }),
 } as const satisfies INTERNAL_GAME_CONFIG;
 
 export const PROSEKAColours = [
-	ClassValue("BLUE", "青", "Blue: 0 - 9.99 Rating"),
-	ClassValue("RED", "赤", "Red: 10 - 13.99 Rating"),
-	ClassValue("YELLOW", "黄", "Yellow: 14 - 17.99 Rating"),
-	ClassValue("ORANGE", "橙", "Orange: 18 - 21.99 Rating"),
-	ClassValue("COPPER", "銅", "Copper: 22 - 25.99 Rating"),
-	ClassValue("SILVER", "銀", "Silver: 26 - 29.99 Rating"),
-	ClassValue("GOLD", "金", "Gold: 30 - 31.99 Rating"),
-	ClassValue("PLATINUM", "鉑", "Platinum: 32 - 32.99 Rating"),
-	ClassValue("RAINBOW", "虹", "Rainbow: 33 - 33.99 Rating"),
-	ClassValue("WHITE", "天使", "White: 34 - 34.99 Rating"),
-	ClassValue("GRAY", "宇宙", "Gray: 35 - 35.99 Rating"),
-	ClassValue("BLACK", "神", "Black: >=36 Rating"),
+    ClassValue("BLUE", "青", "Blue: 0 - 9.99 Rating"),
+    ClassValue("RED", "赤", "Red: 10 - 13.99 Rating"),
+    ClassValue("YELLOW", "黄", "Yellow: 14 - 17.99 Rating"),
+    ClassValue("ORANGE", "橙", "Orange: 18 - 21.99 Rating"),
+    ClassValue("COPPER", "銅", "Copper: 22 - 25.99 Rating"),
+    ClassValue("SILVER", "銀", "Silver: 26 - 29.99 Rating"),
+    ClassValue("GOLD", "金", "Gold: 30 - 31.99 Rating"),
+    ClassValue("PLATINUM", "鉑", "Platinum: 32 - 32.99 Rating"),
+    ClassValue("BLACK", "黒", "Black: 33 - 33.99 Rating"),
+    ClassValue("GRAY", "天使", "White: 34 - 34.99 Rating"),
+    ClassValue("WHITE", "宇宙", "Gray: 35 - 35.99 Rating"),
+    ClassValue("RAINBOW", "神", "Black: >=36 Rating"),
 ];
 
 export const PROSEKA_SINGLE_CONF = {
@@ -38,37 +36,59 @@ export const PROSEKA_SINGLE_CONF = {
 			minimumRelevantValue: "FULL COMBO",
 			description: "The type of combo this was.",
 		},
-		clearLamp: {
-			type: "ENUM",
-			values: ["FAILED", "CLEAR"],
-			minimumRelevantValue: "CLEAR",
-			description: "The type of clear this was.",
+		perfectjudgements: {
+			type: "INTEGER",
+			formatter: FmtScoreNoCommas,
+			validate: p.isPositiveInteger,
+			description: "The amount of PERFECT judgements in this score.",
+		},
+		greatjudgements: {
+			type: "INTEGER",
+			formatter: FmtScoreNoCommas,
+			validate: p.isPositiveInteger,
+			description: "The amount of GREAT judgements in this score.",
+		},
+		goodjudgements: {
+			type: "INTEGER",
+			formatter: FmtScoreNoCommas,
+			validate: p.isPositiveInteger,
+			description: "The amount of GOOD judgements in this score.",
+		},
+		badjudgements: {
+			type: "INTEGER",
+			formatter: FmtScoreNoCommas,
+			validate: p.isPositiveInteger,
+			description: "The amount of BAD judgements in this score.",
+		},
+		missjudgements: {
+			type: "INTEGER",
+			formatter: FmtScoreNoCommas,
+			validate: p.isPositiveInteger,
+			description: "The amount of MISS judgements in this score.",
 		},
 	},
 
-	// ✅ REQUIRED BY INTERNAL_GAME_PT_CONFIG
-	derivedMetrics: {},
+	derivedMetrics: {
+		percent: {
+        	type: "DECIMAL",
+        	validate: p.isBetween(0, 100),
+        	formatter: FmtPercent,
+        	description: "EX Score divided by the maximum possible EX Score on this chart.",
+    	},
+	},
 
-	defaultMetric: "clearLamp",
+	defaultMetric: "exscore",
 	preferredDefaultEnum: "noteLamp",
 
 	optionalMetrics: {
-		...FAST_SLOW_MAXCOMBO,
-		scoreGraph: {
-			type: "GRAPH",
-			validate: p.isBetween(0, 1010000),
-			description: "The history of the projected score, queried in one-second intervals.",
-		},
-		lifeGraph: {
-			type: "GRAPH",
-			validate: p.isBetween(0, 999),
-			description: "Challenge gauge history, queried in one-second intervals.",
-		},
+	...FAST_SLOW_MAXCOMBO,
 	},
 
+	
 	scoreRatingAlgs: {
 		rating: {
-			description: "The rating value of this score.",
+			description:
+				"The rating value of this score. This is identical to the system used in game.",
 			formatter: ToDecimalPlaces(2),
 		},
 	},
@@ -90,46 +110,45 @@ export const PROSEKA_SINGLE_CONF = {
 	defaultSessionRatingAlg: "naiveRating",
 	defaultProfileRatingAlg: "naiveRating",
 
-	// This game technically has a dynamic set of difficulties, with a chart being
-	// able to have as many WORLD'S END charts as it likes. However, this is a little
-	// awkward to implement, and I can't be bothered. Sorry!
 	difficulties: {
-		type: "FIXED",
-		order: ["EASY", "NORMAL", "HARD", "EXPERT", "MASTER", "APPEND"],
-		shorthand: {
-			EASY: "E",
-			NORMAL: "N",
-			HARD: "H",
-			EXPERT: "E",
-			MASTER: "M",
-			APPEND: "A",
-		},
-		default: "MASTER",
-	},
+        type: "FIXED",
+        order: ["EASY", "NORMAL", "HARD", "EXPERT", "MASTER", "APPEND"],
+        shorthand: {
+            EASY: "E",
+            NORMAL: "N",
+            HARD: "H",
+            EXPERT: "EX",
+            MASTER: "M",
+            APPEND: "A",
+        },
+        default: "MASTER",
+    },
 
-	classes: {
-		colour: {
-			type: "DERIVED",
-			values: PROSEKAColours,
-			minimumScores: 50,
-			minimumRelevantValue: "RAINBOW",
-		},
-	},
+    classes: {
+        colour: {
+            type: "DERIVED",
+            values: PROSEKAColours,
+            minimumScores: 30,
+            minimumRelevantValue: "BLACK",
+        },
+    },
 
-	orderedJudgements: ["perfect", "great", "good", "bad", "miss"],
+    orderedJudgements: ["perfect", "great", "good", "bad", "miss"],
 
-	versions: {
-		proseka: "PROJECT SEKAI",
-		ourstage: "OURSTAGE",
-	},
-
+    versions: {
+        proseka: "PROJECT SEKAI",
+        ourstage: "OURSTAGE",
+    },
+	
 	chartData: z.strictObject({
 		inGameID: zodNonNegativeInt,
 	}),
 
 	preferences: z.strictObject({}),
 
-	scoreMeta: z.strictObject({}),
+	scoreMeta: z.strictObject({
+	}),
+
 
 	supportedMatchTypes: ["inGameID", "songTitle", "tachiSongID"],
 } as const satisfies INTERNAL_GAME_PT_CONFIG;

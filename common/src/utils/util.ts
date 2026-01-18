@@ -141,6 +141,8 @@ export function FormatDifficultySearch(chart: ChartDocument, game: Game): string
 		case "bms":
 		case "pms":
 			return null;
+		case "proseka":
+			return `${shortDiff} ${chart.level}`;
 	}
 }
 

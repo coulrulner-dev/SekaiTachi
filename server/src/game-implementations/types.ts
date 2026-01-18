@@ -198,7 +198,7 @@ export interface GPTServerImplementation<GPT extends GPTString> {
 	 * ^^^^^^^^^^^^^^^^^^^^^^
 	 * this bit
 	 */
-	goalCriteriaFormatters: GPTGoalFormatters<GPT>;
+	goalCriteriaFormatters: Partial<GPTGoalFormatters<GPT>>;
 
 	/**
 	 * How should we format the "outOf" part of a goal?
@@ -207,7 +207,7 @@ export interface GPTServerImplementation<GPT extends GPTString> {
 	 *             ^^^^^^^^
 	 *              this bit
 	 */
-	goalOutOfFormatters: GPTGoalFormatters<GPT>;
+	goalOutOfFormatters: Partial<GPTGoalFormatters<GPT>>;
 
 	/**
 	 * How should we format the progress on a goal?
@@ -216,7 +216,7 @@ export interface GPTServerImplementation<GPT extends GPTString> {
 	 *  ^^^^^^^^
 	 *   this bit
 	 */
-	goalProgressFormatters: GPTGoalProgressFormatters<GPT>;
+	goalProgressFormatters: Partial<GPTGoalProgressFormatters<GPT>>;
 
 	/**
 	 * How should we mutate PBs (to join best lamps, lowest BPs, etc.) for this GPT?

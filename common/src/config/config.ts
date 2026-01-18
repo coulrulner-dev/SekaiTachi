@@ -17,6 +17,7 @@ import { POPN_9B_CONF, POPN_CONF } from "./game-support/popn";
 import { SDVX_CONF, SDVX_SINGLE_CONF } from "./game-support/sdvx";
 import { USC_CONF, USC_CONTROLLER_CONF, USC_KEYBOARD_CONF } from "./game-support/usc";
 import { WACCA_CONF, WACCA_SINGLE_CONF } from "./game-support/wacca";
+import { PROSEKA_CONF, PROSEKA_SINGLE_CONF } from "./game-support/proseka";
 import { p } from "prudence";
 import type {
 	GPTString,
@@ -52,6 +53,7 @@ export const GAME_CONFIGS = {
 	arcaea: ARCAEA_CONF,
 	ongeki: ONGEKI_CONF,
 	ddr: DDR_CONF,
+	proseka: PROSEKA_CONF,
 } as const satisfies Record<string, INTERNAL_GAME_CONFIG>;
 
 /**
@@ -102,6 +104,7 @@ export const GAME_PT_CONFIGS = {
 	"ongeki:Single": ONGEKI_SINGLE_CONF,
 	"ddr:SP": DDR_SP_CONF,
 	"ddr:DP": DDR_DP_CONF,
+	"proseka:Single": PROSEKA_SINGLE_CONF,
 } as const satisfies Record<GPTString, INTERNAL_GAME_PT_CONFIG>;
 
 /**
