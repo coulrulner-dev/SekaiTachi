@@ -44,8 +44,9 @@
 			"@types/express-serve-static-core": "4.17.29",
 			"@types/express": "4.17.13",
 			"ts-node": "10.9.1",
-			"mongodb": "3.6.3"
-		},
+			"mongodb": "3.6.3",
+			"rg-stats": "github:coulrulner-dev/sekai-rg-stats#master"
+		}, 
 		"patchedDependencies": {
 			"@types/mongodb@3.6.20": "patches/@types__mongodb@3.6.20.patch",
 			"browserslist@4.21.4": "patches/browserslist@4.21.4.patch",
