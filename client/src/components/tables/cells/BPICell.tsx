@@ -5,7 +5,7 @@ import Muted from "components/util/Muted";
 import useLUGPTSettings from "components/util/useLUGPTSettings";
 import { UserContext } from "context/UserContext";
 import React, { useContext } from "react";
-import { PoyashiBPI } from "rg-stats";
+import * as PoyashiBPI from "rg-stats/algorithms/poyashi-bpi";
 import {
 	ChartDocument,
 	GetGrade,

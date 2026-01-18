@@ -9,7 +9,7 @@ import {
 import { CreatePBMergeFor } from "game-implementations/utils/pb-merge";
 import { ProfileAvgBestN } from "game-implementations/utils/profile-calc";
 import { SessionAvgBest10For } from "game-implementations/utils/session-calc";
-import { PoyashiBPI } from "rg-stats";
+import * as PoyashiBPI from "rg-stats/algorithms/poyashi-bpi";
 import { IIDXLIKE_GBOUNDARIES } from "tachi-common";
 import { IsNullish } from "utils/misc";
 import type {
